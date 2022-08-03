@@ -51,7 +51,7 @@ function App() {
   // }
 
 
-  React.useEffect(()=> {
+  // React.useEffect(()=> {
     // callSomething();
     // callSomethingAxios(); 
 
@@ -99,11 +99,29 @@ function App() {
 //     console.log('Error!');
 //   }
 // };
+  // }, []);
 
-  }, []);
+
+
+  const axiosPing = async () => {
+    const res = await axios.get("http://localhost:5001/ping");
+
+    window.alert(res.data.answer);
+
+  }
+  const fetchPing = async () => {
+    const res = await fetch('http://localhost:5001/ping', { headers: { "Content-Type": "application/json" } });
+
+    const data = await res.json();
+    console.log(data);
+    window.alert(data.answer);
+
+  }
+
   return (
     <div className="App">
-    
+      <button onClick={axiosPing}>악시오스를 사용해서 요청</button>
+      <button onClick={fetchPing}>패치를 사용해서 요청</button>
     </div>
   );
 }
